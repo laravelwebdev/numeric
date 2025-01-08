@@ -9,6 +9,7 @@
             <input
                 :id="field.attribute"
                 type="text"
+                inputmode="numeric"
                 class="w-full form-control form-input form-control-bordered"
                 :class="errorClasses"
                 :placeholder="field.name"
@@ -57,7 +58,7 @@ export default {
 
         handleInput(event) {
             // Remove any non-digit characters except separator
-            let input = event.target.value.replace(new RegExp(`[^\\d${this.field.separator || "."}]`, 'g'), "");
+            let input = event.target.value.replace(new RegExp(`(?!^-)[^\\d${this.field.separator || "."}]`, 'g'), "");
             // Remove all separator to get raw number
             let rawNumber = input.replace(new RegExp(`\\${this.field.separator || "."}`, 'g'), "");
             // Update the internal value
